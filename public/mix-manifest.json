@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/openpgp.min.js": "/js/openpgp.min.js",
+    "/js/openpgp.worker.min.js": "/js/openpgp.worker.min.js"
 }

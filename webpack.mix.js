@@ -12,4 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.react('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+.copy('node_modules/openpgp/dist/openpgp.min.js', 'public/js')
+.copy('node_modules/openpgp/dist/openpgp.worker.min.js', 'public/js')
+.sass('resources/sass/app.scss', 'public/css');
