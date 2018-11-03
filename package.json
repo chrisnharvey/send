@@ -20,5 +20,8 @@
         "react-dom": "^16.2.0",
         "openpgp": "^4.1.2",
         "password-generator": "^2.2.0"
+    },
+    "dependencies": {
+        "react-router-dom": "^4.3.1"
     }
 }
