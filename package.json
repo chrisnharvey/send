@@ -19,6 +19,8 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "react": "^16.2.0",
-        "react-dom": "^16.2.0"
+        "react-dom": "^16.2.0",
+        "openpgp": "^4.1.2",
+        "password-generator": "^2.2.0"
     }
 }
