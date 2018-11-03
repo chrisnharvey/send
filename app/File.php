@@ -12,4 +12,9 @@ class File extends Model
         'disk',
         'path'
     ];
+
+    protected $hidden = [
+        'id',
+        'disk'
+    ];
 }
