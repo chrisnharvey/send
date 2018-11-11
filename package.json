@@ -22,6 +22,8 @@
         "password-generator": "^2.2.0"
     },
     "dependencies": {
+        "hashget": "^1.0.1",
+        "pbkdf2": "^3.0.17",
         "react-router-dom": "^4.3.1"
     }
 }
