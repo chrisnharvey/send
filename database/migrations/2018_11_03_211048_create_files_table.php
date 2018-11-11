@@ -16,6 +16,8 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('identifier');
+            $table->char('auth_key', 128);
+            $table->boolean('has_password')->default(false);
             $table->text('name');
             $table->string('disk');
             $table->string('path');
