@@ -27,13 +27,15 @@ class FilesController extends Controller
             'auth_key' => 'required|size:128'
         ]);
 
-        return File::create([
+        $file = File::create([
             'name' => $data['name'],
             'identifier' => (string) Str::uuid(),
             'auth_key' => $data['auth_key'],
             'disk' => $this->disk,
             'path' => $request->file('file')->store(null, $this->disk)
         ]);
+
+        return new UnauthenticatedFileResource($file);
     }
 
     /**
