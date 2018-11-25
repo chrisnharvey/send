@@ -56,13 +56,8 @@ export default class Upload extends Component {
                         }
                     }
                 ).then((response) => {
-                    console.log({
-                        identifier: response.data.identifier,
-                        key: encryptionData.key,
-                        salt: encryptionData.salt
-                    })
                     this.props.success({
-                        identifier: response.data.identifier,
+                        identifier: response.data.data.identifier,
                         key: encryptionData.key,
                         salt: encryptionData.salt
                     })
