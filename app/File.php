@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
+    protected $fillable = [
+        'name',
+        'identifier',
+        'disk',
+        'path',
+        'auth_key'
+    ];
+
     public static function findByIdentifierOrFail(string $identifier)
     {
         return static::where('identifier', '=', $identifier)->firstOrFail();
