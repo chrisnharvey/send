@@ -22,8 +22,13 @@ class FilesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            // Allow the file name to a length of 1000 to allow for increased filesize after encryption
             'name' => 'required|max:1000',
+
+            // Allow upload of 600MB to account for increased filesize after encryption
             'file' => 'required|file|max:614400',
+
+            // Auth key will always be 128 bytes long
             'auth_key' => 'required|size:128'
         ]);
 
