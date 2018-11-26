@@ -7,31 +7,31 @@ import Download from './Download'
 
 export default class App extends Component {
 
-    render() {
-        return (
-            <Router>
-                <Layout className="layout">
-                    <Header style={{background: '#f0f2f5'}}>
+	render() {
+		return (
+			<Router>
+				<Layout className="layout">
+					<Header style={{background: '#f0f2f5'}}>
 
-                    </Header>
+					</Header>
 
-                    <Content style={{ padding: '0 24px', minHeight: 280 }} className="main-layout-content">
-                        <Row type="flex" justify="center" align="middle">
-                            <Col span={12} style={{background: '#fff', padding: '20px'}}>
-                                <Switch>
-                                    <Route path="/" exact component={Home} />
-                                    <Route path="/:identifier" component={Download} />
-                                </Switch>
-                            </Col>
-                        </Row>
-                    </Content>
+					<Content style={{ padding: '0 24px', minHeight: 280 }} className="main-layout-content">
+						<Row type="flex" justify="center" align="middle">
+							<Col span={12} style={{background: '#fff', padding: '20px'}}>
+								<Switch>
+									<Route path="/" exact component={Home} />
+									<Route path="/:identifier" component={Download} />
+								</Switch>
+							</Col>
+						</Row>
+					</Content>
 
-                    <Footer className="footer" style={{ textAlign: "center" }}>
+					<Footer className="footer" style={{ textAlign: "center" }}>
 
-                    </Footer>
-                </Layout>
-            </Router>
-        )
-    }
+					</Footer>
+				</Layout>
+			</Router>
+		)
+	}
 
 }
