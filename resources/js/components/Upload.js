@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import generatePassword from 'password-generator'
 import { Icon, Upload as Uploader, Input, Button, Checkbox, Row } from 'antd';
 import Encryption from '../lib/Encryption'
+import Axios from 'axios';
 
 const Dragger = Uploader.Dragger
 
@@ -48,7 +49,7 @@ export default class Upload extends Component {
 				formData.append('file', encryptionData.fileContents)
 				formData.append('auth_key', encryptionData.authKey)
 
-				axios.post('/api/files',
+				Axios.post('/api/files',
 					formData,
 					{
 						headers: {
