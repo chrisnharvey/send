@@ -48,7 +48,7 @@ export default class Api {
           }
         }
       ).then(
-        response => resolve(response.data),
+        response => resolve(response.data.data),
         response => reject(response)
       )
     })
