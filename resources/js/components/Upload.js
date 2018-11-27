@@ -3,6 +3,7 @@ import generatePassword from 'password-generator'
 import { Icon, Upload as Uploader, Input, Button, Checkbox, Row } from 'antd';
 import Encryption from '../lib/Encryption'
 import Api from '../lib/Api'
+import File from '../lib/File';
 
 const Dragger = Uploader.Dragger
 
@@ -17,6 +18,7 @@ export default class Upload extends Component {
 
     this.encryption = new Encryption
     this.api = new Api
+    this.file = new File
 
 		this.state = {
 			uploading: false,
@@ -34,32 +36,18 @@ export default class Upload extends Component {
 			submitButtonMessage: 'Encrypting...'
 		})
 
-    // Encrypt the file
-    this.encryption.encryptFileObject(this.state.file.name, this.state.file.originFileObj, this.state.password).then(encryptionData => {
-      // Encryption finished
-			this.setState({
-				uploading: true,
-				submitButtonMessage: 'Uploading...'
-			})
-
-      // Now upload the encrypted file to the server
-      this.api.uploadFile(encryptionData.fileName, encryptionData.fileContents, encryptionData.authKey).then(response => {
-        // Successfully uploaded
-        console.log(this.props)
-        this.props.success({
-						identifier: response.data.identifier,
-						key: encryptionData.key,
-						salt: encryptionData.salt
-					})
-      }, () => {
-        // Upload failed
-        console.log('fail')
-
+    this.file.upload({
+      name: this.state.file.name,
+      file: this.state.file.originFileObj,
+      password: this.state.password,
+      onEncryptionComplete: () => {
         this.setState({
-          uploading: false,
-          submitButtonMessage: 'Upload'
+          submitButtonMessage: 'Uploading..'
         })
-      })
+      }
+    }).then(file => {
+      console.log(file)
+      this.props.success(file)
     })
 	}
 
