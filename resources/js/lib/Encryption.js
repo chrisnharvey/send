@@ -79,6 +79,16 @@ export default class Encryption {
     })
   }
 
+  getAuthKey(key, salt) {
+    return this.deriveKey(key, salt)
+  }
+
+  getEncryptionKey(key, salt, password) {
+    password = password ? password : key
+
+    return this.deriveKey(password, salt, 5001)
+  }
+
   decryptFileName(name, key, salt, password) {
     return this.decrypt({encrypted: name, key, salt, password})
   }
