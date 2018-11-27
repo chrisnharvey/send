@@ -29,15 +29,15 @@ export default class Api {
     })
   }
 
-	uploadFile(name, file, authKey) {
+  uploadFile(name, file, authKey) {
 
-		// Instantiate a new FormData object
-		let formData = new FormData
+    // Instantiate a new FormData object
+    let formData = new FormData
 
-		// Add our data to it
-		formData.append('name', name)
-		formData.append('file', file)
-		formData.append('auth_key', authKey)
+    // Add our data to it
+    formData.append('name', name)
+    formData.append('file', file)
+    formData.append('auth_key', authKey)
 
     return new Promise((resolve, reject) => {
       // Actually upload our encrypted file to the server
@@ -52,7 +52,7 @@ export default class Api {
         response => reject(response)
       )
     })
-		
-	}
+    
+  }
 
 }
