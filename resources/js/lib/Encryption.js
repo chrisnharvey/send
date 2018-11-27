@@ -65,6 +65,41 @@ export default class Encryption {
     })
   }
 
+  decryptFileName(name, key, salt, password) {
+    return this.decrypt({encrypted: name, key, salt, password})
+  }
+
+  decryptFile(contents, key, salt, password) {
+    return this.decrypt({encrypted: contents, key, salt, password, format: 'binary'})
+  }
+
+  decrypt({encrypted, key, salt, password, format = 'utf8'}) {
+    return new Promise((resolve, reject) => {
+      password = password ? password : key
+
+      this.deriveKey(password, salt, 5001).then(encryptionKey => {
+        let readMessage;
+
+        if (format == 'binary') {
+          readMessage = window.openpgp.message.read(new Uint8Array(encrypted))
+        } else {
+          readMessage = window.openpgp.message.readArmored(encrypted)
+        }
+
+        readMessage.then((message) => {
+          window.openpgp.decrypt({
+            message,
+            format,
+            passwords: [encryptionKey],
+          }).then(decrypted => {
+            resolve(decrypted.data)
+          })
+        })
+      })
+
+    })
+  }
+
   generateKeypair(password) {
     let options = {
       userIds: [{ name:'', email:'' }],
