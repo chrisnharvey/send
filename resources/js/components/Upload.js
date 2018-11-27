@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import generatePassword from 'password-generator'
 import { Icon, Upload as Uploader, Input, Button, Checkbox, Row } from 'antd';
 import Encryption from '../lib/Encryption'
-import Axios from 'axios';
+import Api from '../lib/Api'
 
 const Dragger = Uploader.Dragger
 
@@ -14,6 +14,9 @@ export default class Upload extends Component {
 		this.fileChanged = this.fileChanged.bind(this)
 		this.passwordChanged = this.passwordChanged.bind(this)
 		this.addPasswordChanged = this.addPasswordChanged.bind(this)
+
+    this.encryption = new Encryption
+    this.api = new Api
 
 		this.state = {
 			uploading: false,
@@ -31,49 +34,33 @@ export default class Upload extends Component {
 			submitButtonMessage: 'Encrypting...'
 		})
 
-		let file = this.state.file
-		let reader = new FileReader
+    // Encrypt the file
+    this.encryption.encryptFileObject(this.state.file.name, this.state.file.originFileObj, this.state.password).then(encryptionData => {
+      // Encryption finished
+			this.setState({
+				uploading: true,
+				submitButtonMessage: 'Uploading...'
+			})
 
-		reader.onload = () => {
-			let enc = new Encryption
-			enc.encrypt(file.name, reader.result, this.state.password).then((encryptionData) => {
-				// Now upload to the server.
-				this.setState({
-					uploading: true,
-					submitButtonMessage: 'Uploading...'
-				})
-
-				let formData = new FormData
-
-				formData.append('name', encryptionData.fileName)
-				formData.append('file', encryptionData.fileContents)
-				formData.append('auth_key', encryptionData.authKey)
-
-				Axios.post('/api/files',
-					formData,
-					{
-						headers: {
-							'Content-Type': 'multipart/form-data'
-						}
-					}
-				).then((response) => {
-					this.props.success({
-						identifier: response.data.data.identifier,
+      // Now upload the encrypted file to the server
+      this.api.uploadFile(encryptionData.fileName, encryptionData.fileContents, encryptionData.authKey).then(response => {
+        // Successfully uploaded
+        console.log(this.props)
+        this.props.success({
+						identifier: response.data.identifier,
 						key: encryptionData.key,
 						salt: encryptionData.salt
 					})
-				}, () => {
-					console.log('fail')
+      }, () => {
+        // Upload failed
+        console.log('fail')
 
-					this.setState({
-						uploading: false,
-						submitButtonMessage: 'Upload'
-					})
-				})
-			})
-		}
-
-		reader.readAsArrayBuffer(file.originFileObj)
+        this.setState({
+          uploading: false,
+          submitButtonMessage: 'Upload'
+        })
+      })
+    })
 	}
 
 	fileChanged(e) {
