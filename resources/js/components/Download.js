@@ -4,7 +4,7 @@ import { HashGet } from 'hashget'
 import { Button, Progress } from 'antd';
 import FileSaver from 'file-saver';
 import { Redirect } from 'react-router'
-import Api from '../lib/Api';
+import File from '../lib/File';
 
 
 export default class Download extends Component {
@@ -13,8 +13,7 @@ export default class Download extends Component {
         super(props)
 
         this.hash = new HashGet
-        this.encryption = new Encryption
-        this.api = new Api
+        this.file = new File
 
         this.key = this.hash.getValue('k')
         this.salt = this.hash.getValue('s')
@@ -25,55 +24,37 @@ export default class Download extends Component {
         }
     }
 
-    getFile() {
-      return new Promise((resolve, reject) => {
-        this.encryption.getAuthKey(this.key, this.salt).then(authKey => {
-          this.api.getFile(this.identifier, authKey).then(response => {
-            resolve(response)
-          })
-        })
-      })
-    }
-
     downloadFile() {
-      this.api.downloadFile(this.state.path, downloadPercent => {
-        this.setState({
-          state: 'downloading',
-          downloadPercent
-        })
-      }).then(file => {
-        // Start decrypting
-        this.encryption.decryptFile(file, this.key, this.salt).then(decrypted => {
-          // Open file dialog
-          FileSaver.saveAs(
-            new Blob([decrypted], {type: "octet/stream"}),
-            this.state.name
-          )
-
+      this.file.download({
+        path: this.state.path,
+        key: this.key,
+        salt: this.salt,
+        onProgress: downloadPercent => {
           this.setState({
-            state: 'complete'
+            state: 'downloading',
+            downloadPercent
           })
+        }
+      }).then(file => {
+        FileSaver.saveAs(
+          new Blob([file], {type: "octet/stream"}),
+          this.state.name
+        )
+
+        this.setState({
+          state: 'complete'
         })
       })
     }
 
     componentDidMount() {
-      this.getFile().then(data => {
+      this.file.get(this.identifier, this.key, this.salt).then(file => {
 
-        if (! data.has_password) {
-          // This file doesn't have a password, so lets decrypt the filename
-          this.encryption.decryptFileName(data.name, this.key, this.salt).then(decrypted => {
-            this.setState({
-              ...data,
-              name: decrypted,
-              state: 'ready'
-            })
-          })
-        } else {
-          this.setState({
-            state: 'password'
-          })
-        }
+        this.setState({
+          ...file,
+          state: file.has_password ? 'password' : 'ready'
+        })
+    
       }, error => {
         console.error(error)
       })
