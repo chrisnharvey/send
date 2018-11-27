@@ -30,9 +30,13 @@ export default class File {
     })
   }
 
-  download({path, key, salt, password, onProgress}) {
+  download({path, key, salt, password, onProgress, onDownloadComplete}) {
     return new Promise((resolve, reject) => {
       this.api.downloadFile(path, onProgress).then(file => {
+        if (onDownloadComplete) {
+          onDownloadComplete(file)
+        }
+
         // Start decrypting
         this.encryption.decryptFile(file, key, salt, password).then(decrypted => {
           resolve(decrypted)
