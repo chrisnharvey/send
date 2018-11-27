@@ -14,6 +14,20 @@ export default class Encryption {
     })
   }
 
+  encryptFileObject(name, fileObject, password) {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader
+
+      reader.onload = () => {
+        this.encrypt(name, reader.result, password).then(response => {
+          resolve(response)
+        })
+      }
+
+      reader.readAsArrayBuffer(fileObject)
+    })
+  }
+
   encrypt(name, contents, password) {
     return new Promise((resolve) => {
       // Generate a key and salt
