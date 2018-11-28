@@ -1,0 +1,25 @@
+image: php:7.2
+
+# Cache vendor and node_modules between builds
+cache:
+  paths:
+    - vendor/
+    - node_modules/
+    
+test:php:
+  stage: test
+
+  before_script:
+    - composer install
+
+  script:
+    - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
+
+test:js:
+  stage: test
+
+  before_script:
+    - npm install
+
+  script:
+    - npm run test
