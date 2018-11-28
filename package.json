@@ -12,6 +12,7 @@
     "devDependencies": {
         "babel-preset-react": "^6.23.0",
         "cross-env": "^5.1",
+        "jest": "^23.6.0",
         "laravel-mix": "^2.0"
     },
     "dependencies": {
