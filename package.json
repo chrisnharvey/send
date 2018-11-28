@@ -10,18 +10,18 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "antd": "^3.10.3",
-        "axios": "^0.18",
         "babel-preset-react": "^6.23.0",
         "cross-env": "^5.1",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^2.0"
+    },
+    "dependencies": {
+        "antd": "^3.10.3",
+        "axios": "^0.18",
         "lodash": "^4.17.5",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "openpgp": "^4.1.2",
-        "password-generator": "^2.2.0"
-    },
-    "dependencies": {
+        "password-generator": "^2.2.0",
         "file-saver": "^2.0.0",
         "hashget": "^1.0.1",
         "pbkdf2": "^3.0.17",
