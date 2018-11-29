@@ -1,4 +1,7 @@
-image: php:7.2
+image: registry.gitlab.com/skygard/send:latest
+
+services:
+  - mysql:5.7
 
 # Cache vendor and node_modules between builds
 cache:
@@ -6,20 +9,13 @@ cache:
     - vendor/
     - node_modules/
     
-test:php:
+test:
   stage: test
 
   before_script:
     - composer install
-
-  script:
-    - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
-
-test:js:
-  stage: test
-
-  before_script:
     - npm install
 
   script:
+    - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
     - npm run test
