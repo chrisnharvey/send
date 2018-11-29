@@ -3,6 +3,12 @@ image: registry.gitlab.com/skygard/send:latest
 services:
   - mysql:5.7
 
+variables:
+  MYSQL_DATABASE: send
+  MYSQL_ROOT_PASSWORD: secret
+  DB_HOST: mysql
+  DB_USERNAME: root
+
 # Cache vendor and node_modules between builds
 cache:
   paths:
