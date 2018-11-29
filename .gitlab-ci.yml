@@ -15,6 +15,8 @@ test:
   before_script:
     - composer install
     - npm install
+    - php artisan key:generate
+    - php artisan migrate
 
   script:
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
