@@ -13,6 +13,7 @@ test:
   stage: test
 
   before_script:
+    - cp .env.example .env
     - composer install
     - npm install
     - php artisan key:generate
