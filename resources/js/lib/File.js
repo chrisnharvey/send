@@ -45,14 +45,14 @@ export default class File {
     })
   }
 
-  upload({name, file, password, onEncryptionComplete}) {
+  upload({name, file, password, onEncryptionComplete, onProgress}) {
     return new Promise((resolve, reject) => {
       this.encryption.encryptFileObject(name, file, password).then(encryptionData => {
         if (onEncryptionComplete) {
           onEncryptionComplete()
         }
 
-        this.api.uploadFile(encryptionData.fileName, encryptionData.fileContents, encryptionData.authKey).then(fileData => {
+        this.api.uploadFile(encryptionData.fileName, encryptionData.fileContents, encryptionData.authKey, onProgress).then(fileData => {
           resolve({
             ...fileData,
             ...encryptionData

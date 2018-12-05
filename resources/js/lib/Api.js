@@ -29,7 +29,7 @@ export default class Api {
     })
   }
 
-  uploadFile(name, file, authKey) {
+  uploadFile(name, file, authKey, onProgress) {
 
     // Instantiate a new FormData object
     let formData = new FormData
@@ -43,6 +43,16 @@ export default class Api {
       // Actually upload our encrypted file to the server
       Axios.post('/api/files',
         formData, {
+          onUploadProgress: (e) => {
+            if (! onProgress) {
+              return;
+            }
+
+            onProgress(
+              (Math.floor((e.loaded / e.total) * 100))
+            )
+          },
+
           headers: {
             'Content-Type': 'multipart/form-data'
           }
