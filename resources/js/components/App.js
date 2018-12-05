@@ -11,8 +11,8 @@ export default class App extends Component {
     return (
       <Router>
         <Layout className="layout">
-          <Header style={{background: '#f0f2f5'}}>
-
+          <Header style={{margin: '20px', textAlign: 'center', background: '#f0f2f5'}}>
+            <img src="/img/logo.png" />
           </Header>
 
           <Content style={{ padding: '0 24px', minHeight: 280 }} className="main-layout-content">
