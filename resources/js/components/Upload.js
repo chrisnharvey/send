@@ -81,7 +81,7 @@ export default class Upload extends Component {
         <Icon type="upload" />
         </p>
         <p className="ant-upload-text">{ this.state.uploaded ? this.state.file.name : 'Drag a file here or click to upload' }</p>
-        <p className="ant-upload-hint">Max filesize: 500MB. Your file will be encrypted in your browser using the password below before upload.</p>
+        <p className="ant-upload-hint">Max filesize: 500MB. Your file will be encrypted in your browser before upload.</p>
       </Dragger>
     )
   }
