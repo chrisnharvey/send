@@ -6,7 +6,6 @@ import FileSaver from 'file-saver';
 import { Redirect } from 'react-router'
 import File from '../lib/File';
 
-
 export default class Download extends Component {
 
     constructor(props) {
@@ -69,7 +68,11 @@ export default class Download extends Component {
           return 'Enter password'
 
         case 'downloading':
-          return <Progress type="circle" width={210} percent={this.state.downloadPercent} format={percent => percent == 100 ? 'Decrypting' : `${percent}%`} />
+          return (
+            <div style={{textAlign: 'center'}}>
+              <Progress type="circle" width={210} percent={this.state.downloadPercent} format={percent => percent == 100 ? 'Decrypting' : `${percent}%`} />
+            </div>
+          )
 
         case 'complete':
           return <Redirect to="/complete" />
