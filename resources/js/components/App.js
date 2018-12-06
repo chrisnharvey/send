@@ -4,6 +4,7 @@ import { Layout, Row, Col } from 'antd';
 const { Header, Content, Footer } = Layout;
 import Home from './Home'
 import Download from './Download'
+import DownloadComplete from './DownloadComplete'
 
 export default class App extends Component {
 
@@ -22,7 +23,7 @@ export default class App extends Component {
               <Col span={12} style={{background: '#fff', padding: '20px'}}>
                 <Switch>
                   <Route path="/" exact component={Home} />
-                  <Route path="/complete" exact component={Home} />
+                  <Route path="/complete" exact component={DownloadComplete} />
                   <Route path="/:identifier" component={Download} />
                 </Switch>
               </Col>
