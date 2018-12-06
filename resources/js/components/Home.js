@@ -24,7 +24,6 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <h1 style={{textAlign: 'center'}}>Send Files, Securely</h1>
         {this.state.uploadSuccess ? <UploadSuccess data={this.state.uploadData} /> : <Upload success={this.uploadSuccess} />}
       </div>
     );

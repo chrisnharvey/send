@@ -76,6 +76,10 @@ export default class Upload extends Component {
   render() {
     return (
       <div>
+        <h1 style={{textAlign: 'center'}}>Send Files, Securely</h1>
+        <p style={{textAlign: 'center'}}>Skygard Send is a service that allows you to send files through a private link that automatically expires.
+          Your files are encrypted in your browser before uploading, meaning only you, and people you share your link to
+          can see the name and contents of your file.</p>
         { this.state.uploading ? this.getUploadProgressComponent() : this.getUploadBoxComponent() }
       </div>
     )
