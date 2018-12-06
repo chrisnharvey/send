@@ -57,7 +57,9 @@ export default class Upload extends Component {
 
   getUploadProgressComponent() {
     return (
-      <Progress type="circle" width={210} percent={this.state.uploadPercent} format={percent => this.state.encrypting ? 'Encrypting' : `${percent}%`} />
+      <div style={{textAlign: 'center'}}>
+        <Progress type="circle" width={210} percent={this.state.uploadPercent} format={percent => this.state.encrypting ? 'Encrypting' : `${percent}%`} />
+      </div>
     )
   }
 
