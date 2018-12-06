@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route , Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route , Switch, Link} from "react-router-dom";
 import React, { Component } from 'react';
 import { Layout, Row, Col } from 'antd';
 const { Header, Content, Footer } = Layout;
@@ -12,7 +12,9 @@ export default class App extends Component {
       <Router>
         <Layout className="layout">
           <Header style={{margin: '20px', textAlign: 'center', background: '#f0f2f5'}}>
-            <img src="/img/logo.png" />
+            <Link to="/">
+              <img src="/img/logo.png" />
+            </Link>
           </Header>
 
           <Content style={{ padding: '0 24px', minHeight: 280 }} className="main-layout-content">
@@ -20,6 +22,7 @@ export default class App extends Component {
               <Col span={12} style={{background: '#fff', padding: '20px'}}>
                 <Switch>
                   <Route path="/" exact component={Home} />
+                  <Route path="/complete" exact component={Home} />
                   <Route path="/:identifier" component={Download} />
                 </Switch>
               </Col>
