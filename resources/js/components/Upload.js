@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import generatePassword from 'password-generator'
-import { Icon, Upload as Uploader, Progress} from 'antd';
+import { Icon, Upload as Uploader, Progress, Spin } from 'antd';
 import Encryption from '../lib/Encryption'
 import Api from '../lib/Api'
 import File from '../lib/File';
@@ -12,6 +12,7 @@ export default class Upload extends Component {
     super(props)
 
     this.uploadFile = this.uploadFile.bind(this)
+    this.getProgressFormat = this.getProgressFormat.bind(this)
 
     this.encryption = new Encryption
     this.api = new Api
@@ -55,10 +56,20 @@ export default class Upload extends Component {
     }
   }
 
+  getProgressFormat(percent) {
+    if (this.state.encrypting) {
+      return <Spin tip="Encrypting" size="large" />
+    } else if (percent == 100) {
+      return <Spin tip="Processing" size="large" />
+    } else {
+      return `${percent}%`
+    }
+  }
+
   getUploadProgressComponent() {
     return (
       <div style={{textAlign: 'center'}}>
-        <Progress type="circle" width={210} percent={this.state.uploadPercent} format={percent => this.state.encrypting ? 'Encrypting' : `${percent}%`} />
+        <Progress type="circle" width={210} percent={this.state.uploadPercent} format={this.getProgressFormat} />
       </div>
     )
   }
