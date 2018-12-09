@@ -72,10 +72,11 @@ export default class Download extends Component {
     render() {
       switch (this.state.state) {
         case 'loading':
-          return 'Loading...'
-        
-        case 'password':
-          return 'Enter password'
+          return (
+            <div style={{textAlign: 'center'}}>
+              <Spin size="large" />
+            </div>
+          )
 
         case 'downloading':
           return (
@@ -90,8 +91,15 @@ export default class Download extends Component {
 
       return (
         <div>
-          <p>{this.state.name}</p>
-          <Button type="primary" icon="download" size="large" onClick={this.downloadFile.bind(this)}>Download</Button>
+          <h1 style={{textAlign: 'center'}}>{this.state.name}</h1>
+          <p style={{textAlign: 'center'}}>Your friend has shared this file with you securely using Skygard Send.</p>
+          <p style={{textAlign: 'center'}}>Skygard Send is a service that allows you to send files through a private link that automatically expires.
+          Your files are encrypted in your browser before uploading, meaning only you, and people you share your link to
+          can see the name and contents of your file.</p>
+
+          <div style={{textAlign: 'center'}}>
+            <Button type="primary" icon="download" size="large" onClick={this.downloadFile.bind(this)}>Download</Button>
+          </div>
         </div>
       )
     }
