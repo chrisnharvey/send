@@ -59,7 +59,11 @@ export default class File {
             ...fileData,
             ...encryptionData
           })
+        }, error => {
+          reject(error)
         })
+      }, error => {
+        reject(error)
       })
     })
     
