@@ -8,6 +8,11 @@ export default class UploadSuccess extends Component {
   constructor(props) {
     super(props)
 
+    let files = window.sessionStorage.getItem('files')
+    files = files ? JSON.parse(files) : {}
+
+    this.file = files[props.match.params.identifier]
+
     this.state = {
       copyButtonText: 'Copy to clipboard'
     }
@@ -36,7 +41,7 @@ export default class UploadSuccess extends Component {
         <p style={{textAlign: 'center'}}>Your file has been uploaded successfully and will expire in 48 hours. You can share your file using the link below.</p>
 
         <Search
-          value={`http://send.local/${this.props.data.identifier}#k=${this.props.data.key}&s=${this.props.data.salt}`}
+          value={`http://send.local/${this.file.identifier}#k=${this.file.key}&s=${this.file.salt}`}
           enterButton={this.state.copyButtonText}
           size="large"
           onSearch={this.copyToClipboard.bind(this)}

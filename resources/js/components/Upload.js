@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import generatePassword from 'password-generator'
 import { Icon, Upload as Uploader, Progress, Spin } from 'antd';
 import Encryption from '../lib/Encryption'
 import Api from '../lib/Api'
 import File from '../lib/File';
+import { Redirect } from 'react-router'
 
 const Dragger = Uploader.Dragger
 
@@ -51,7 +51,17 @@ export default class Upload extends Component {
           })
         }
       }).then(file => {
-        this.props.success(file)
+        let files = window.sessionStorage.getItem('files')
+        files = files ? files : {}
+
+        files[file.identifier] = file
+
+        window.sessionStorage.setItem('files', JSON.stringify(files))
+
+        this.setState({
+          success: true,
+          file
+        })
       })
     }
   }
@@ -87,6 +97,10 @@ export default class Upload extends Component {
   }
 
   render() {
+    if (this.state.success) {
+      return <Redirect to={`/share/${this.state.file.identifier}`} />
+    }
+
     return (
       <div>
         <h1 style={{textAlign: 'center'}}>Send Files, Securely</h1>

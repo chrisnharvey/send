@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Route , Switch, Link} from "react-router-dom";
 import React, { Component } from 'react';
 import { Layout, Row, Col } from 'antd';
 const { Header, Content, Footer } = Layout;
-import Home from './Home'
 import Download from './Download'
 import DownloadComplete from './DownloadComplete'
+import UploadSuccess from './UploadSuccess'
+import Upload from "./Upload";
 
 export default class App extends Component {
 
@@ -22,7 +23,8 @@ export default class App extends Component {
             <Row type="flex" justify="center" align="middle">
               <Col span={12} style={{background: '#fff', padding: '20px'}}>
                 <Switch>
-                  <Route path="/" exact component={Home} />
+                  <Route path="/" exact component={Upload} />
+                  <Route path="/share/:identifier" exact component={UploadSuccess} />
                   <Route path="/complete" exact component={DownloadComplete} />
                   <Route path="/:identifier" component={Download} />
                 </Switch>
