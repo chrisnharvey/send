@@ -19,6 +19,7 @@ export default class Upload extends Component {
     this.file = new File
 
     this.state = {
+      error: false,
       uploading: false,
       encrypting: false,
       file: {}
@@ -62,6 +63,10 @@ export default class Upload extends Component {
           success: true,
           file
         })
+      }, () => {
+        this.setState({
+          error: true
+        })
       })
     }
   }
@@ -79,7 +84,7 @@ export default class Upload extends Component {
   getUploadProgressComponent() {
     return (
       <div style={{textAlign: 'center'}}>
-        <Progress type="circle" width={210} percent={this.state.uploadPercent} format={this.getProgressFormat} />
+        <Progress type="circle" width={210} status={this.state.error ? 'exception' : 'normal'} percent={this.state.uploadPercent} format={this.state.error ? null : this.getProgressFormat} />
       </div>
     )
   }
