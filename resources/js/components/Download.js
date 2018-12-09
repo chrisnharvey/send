@@ -57,7 +57,9 @@ export default class Download extends Component {
         })
     
       }, error => {
-        console.error(error)
+        this.setState({
+          state: 'error'
+        })
       })
     }
 
@@ -75,6 +77,15 @@ export default class Download extends Component {
           return (
             <div style={{textAlign: 'center'}}>
               <Spin size="large" />
+            </div>
+          )
+
+        case 'error':
+          return (
+            <div>
+              <h1 style={{textAlign: 'center'}}>Error</h1>
+
+              <p style={{textAlign: 'center'}}>This file is no longer available</p>
             </div>
           )
 
