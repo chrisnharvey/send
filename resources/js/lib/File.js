@@ -25,6 +25,8 @@ export default class File {
             resolve(file)
 
           }
+        }, error => {
+          reject(error)
         })
       })
     })
