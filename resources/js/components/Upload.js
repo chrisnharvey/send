@@ -52,7 +52,7 @@ export default class Upload extends Component {
         }
       }).then(file => {
         let files = window.sessionStorage.getItem('files')
-        files = files ? files : {}
+        files = files ? JSON.parse(files) : {}
 
         files[file.identifier] = file
 
