@@ -33,7 +33,17 @@ export default class App extends Component {
           </Content>
 
           <Footer className="footer" style={{ textAlign: "center" }}>
+            Skygard Send is an Open Source project licensed under AGPLv3
 
+            <div style={{marginTop: '10px'}}>
+              <a href="https://gitlab.com/skygard/send" target="_blank">
+                <img src="/img/icons/gitlab.svg" style={{width: '30px', marginRight: '10px'}} />
+              </a>
+
+              <a href="https://twitter.com/skygardio" target="_blank">
+                <img src="/img/icons/twitter.svg" style={{width: '30px'}} />
+              </a>
+            </div>
           </Footer>
         </Layout>
       </Router>
