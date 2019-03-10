@@ -1,6 +1,6 @@
 # Skygard Send
 [![pipeline status](https://gitlab.com/skygard/send/badges/master/pipeline.svg)](https://gitlab.com/skygard/send/commits/master)
-[![coverage report](https://gitlab.com/skygard/send/badges/master/coverage.svg)](https://gitlab.com/skygard/send/commits/master)
+
 
 Skygard Send is a way of sending files to friends, family, customers or colleagues securely using Client-Side Encryption.
 
