@@ -14,9 +14,9 @@ licensed under the AGPLv3 or any later version.
 
 Skygard does not require a CLA (Contributor License Agreement).
 The copyright belongs to all the individual contributors. Therefore we recommend
-that every contributor adds following line to the header of a file, if they
-changed it substantially:
+that every contributor adds following line to the AUTHORS file, when submitting a
+Pull Request:
 
 ```
-@copyright Copyright (c) <year>, <your name> (<your email address>)
+- Your Name <your email address>
 ```
